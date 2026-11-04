@@ -6,8 +6,7 @@
 
 | Chantier | Détail | Statut / source |
 |---|---|---|
-| Mission vidéo acquisition | Faire du générateur (`video/` + Worker `video-automation`) un canal d'acquisition ; règle : audit, puis plan validé, avant toute modification | EN COURS, RAPPORTÉ PAR L'UTILISATEUR |
-| Workspace documentaire | Création de ce dépôt (32 fichiers) via branche `workspace-init` + PR à fusionner par Émilien | EN COURS jusqu'à la fusion de la PR |
+| Mission vidéo acquisition | Faire du générateur (`video/` + Worker `video-automation`) un canal d'acquisition ; règle : audit, puis plan validé, avant toute modification. Audit statique des modules Python fait (voir TERMINÉ) ; **aucun plan rédigé ni validé** ; Worker, workflows et résultats de génération non audités | EN COURS, RAPPORTÉ PAR L'UTILISATEUR |
 | Diagnostics de données | Cellules A (fuseau XML/API), B (vidéo `--demo` + TTS), C (parité XML/API) | EN COURS ; seul résultat connu : station 56100009, gazole 2,179 € identique sur XML, API et site officiel (03/11/2026 11:58:50), RAPPORTÉ PAR L'UTILISATEUR |
 
 ## TERMINÉ
@@ -20,13 +19,16 @@
 | Refonte SEO du générateur de pages villes, fusionnée le 2026-09-30 | RAPPORTÉ PAR L'UTILISATEUR ; `SEO_REPORT.md` présent : VÉRIFIÉ |
 | Véhicules multiples et classement par coût total (France, Espagne, Italie) | VÉRIFIÉ (SEO_REPORT : « appliqué » pour les 3 pays) |
 | Correction du mot « l'instant » qui cassait 3 pages villes françaises | RAPPORTÉ PAR L'UTILISATEUR |
-| Connecteur `carburant-mcp` v1.1.0 avec paramètre `repo` (liste blanche de 2 dépôts) | VÉRIFIÉ (création de branche testée sur le Workspace le 2026-11-04) |
+| Connecteur `carburant-mcp` v1.1.0 avec paramètre `repo` (liste blanche de 2 dépôts) | VÉRIFIÉ (branche créée et fichiers écrits sur le Workspace le 2026-11-04) |
+| Workspace documentaire : 32 fichiers, PR #1 fusionnée par Émilien | VÉRIFIÉ (racine de `main` relue) |
+| Audit statique de `video/` (`generate_video.py`, `donnees.py`, `audio.py`, `rendu.py`, `requirements.txt`, début de `musique.py`) : 8 problèmes listés dans [audits/audit_videos.md](audits/audit_videos.md) | TERMINÉ pour la lecture ; rien exécuté ni corrigé |
 
 ## À CONFIRMER (état incertain)
 
 - Portage sur `espagne/` et `italie/` : menu en 4 onglets, bouton « Installer l'application », tutoriel de démarrage, bouton Snapchat, messages de géolocalisation distincts, ville précise (géocodage inverse). Notés « en attente » dans des sessions antérieures ; peuvent avoir été faits depuis. À vérifier dans le code.
 - Option de rayon 50 km : le README de production la liste encore ; une note ancienne dit qu'elle a été abandonnée. À vérifier.
 - Alertes : demande « priorité super importante » du 2026-10-14 (nom renommé dans la notification, clic vers la station) ; une correction du service worker est rapportée, la partie Worker n'est pas confirmée.
+- Non lus : fin de `musique.py`, Worker `video-automation`, Worker `carburant-proxy`, contenu de `.github/` (bloqué par le connecteur).
 
 ## BLOQUÉ / problèmes ouverts
 

@@ -11,10 +11,13 @@
 
 | Élément | Détail | Statut |
 |---|---|---|
-| Google Analytics (gtag) | Cité dans le README ; GA4 précis : version non vérifiée | VÉRIFIÉ pour la mention ; version : À CONFIRMER |
+| Liens publiés par le générateur | `https://carburantradar.fr` sans UTM, racine uniquement ; Instagram : « lien en bio » | VÉRIFIÉ (`video/donnees.py`) |
+| Google Analytics (gtag) | Cité dans le README ; version GA4 non vérifiée | VÉRIFIÉ pour la mention ; version : À CONFIRMER |
 | `track.js` | Fichier de 701 octets à la racine ; contenu non lu | À CONFIRMER |
 | Route `/track` du Worker | Usage quotidien (`usage_days`), ville, email | RAPPORTÉ PAR L'UTILISATEUR |
 | Page `admin/` | Graphique d'usage par jour, détail des connexions, comptes avec ville | RAPPORTÉ PAR L'UTILISATEUR |
+
+Conséquence : aujourd'hui, rien dans l'URL ne dit quelle vidéo, quel format ou quelle ville a amené une visite. Effet réel sur les rapports GA : HYPOTHÈSE (le site référent peut apparaître, sans le détail par vidéo).
 
 ## Indicateurs proposés (PROPOSITION)
 
@@ -26,4 +29,5 @@
 ## À vérifier avant de bâtir la mesure
 
 - Quelles données les API officielles YouTube et Instagram exposent, avec quels quotas et quelles autorisations : À CONFIRMER.
-- Présence d'UTM dans les liens publiés ([../audits/audit_videos.md](../audits/audit_videos.md)).
+- Où stocker les résultats par publication (le numéro de publication `k` existe déjà dans le générateur) : à décider.
+- Pistes côté liens : [../audits/audit_videos.md](../audits/audit_videos.md), problème n° 3.
