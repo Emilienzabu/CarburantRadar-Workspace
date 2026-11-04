@@ -109,10 +109,10 @@ Une analyse préparée par ChatGPT n'est **pas** un correctif intégré tant que
 
 Format et consigne à donner à ChatGPT : [modeles/compte_rendu_session.md](modeles/compte_rendu_session.md) (partie 2). Fonctionnement :
 
-1. ChatGPT prépare le paquet (statut EN ATTENTE DE TRANSMISSION).
+1. ChatGPT prépare le paquet (statut EN ATTENTE DE TRANSMISSION) dans **un seul bloc de code délimité par quatre accents graves** ; les extraits de code qu'il contient sont dans des blocs à trois accents graves.
 2. Émilien le copie tel quel dans une conversation Claude (une seule action).
-3. Claude contrôle avant d'intégrer : aucun secret ni donnée personnelle ; statuts cohérents et aucune hypothèse promue en fait ; aucune décision non validée ; fichiers et versions comparés à l'état actuel de `main` ; absence de conflit avec un travail récent ([CHANGELOG.md](CHANGELOG.md), dernier journal).
-4. Claude intègre : contenu dans la section `[ChatGPT]` du journal du jour, plus les fichiers concernés. Le paquet passe à EN ATTENTE D'INTÉGRATION et figure dans [AVANCEMENT.md](AVANCEMENT.md).
+3. Claude contrôle avant d'intégrer : aucun secret ni donnée personnelle ; statuts cohérents et aucune hypothèse promue en fait ; aucune décision non validée ; fichiers et versions comparés à l'état actuel de `main` ; absence de conflit avec un travail récent ([CHANGELOG.md](CHANGELOG.md), dernier journal). Si les délimiteurs de bloc ont été altérés à la copie, les lignes `=== PAQUET DE TRANSFERT CHATGPT → CLAUDE ===` et `=== FIN DU PAQUET ===` font foi.
+4. Claude intègre dans la section `[ChatGPT]` du journal du jour : **d'abord un compte rendu synthétique en 11 sections, puis le paquet conservé intégralement**, tel que reçu (rien n'est résumé, supprimé ni reformulé), dans un bloc à quatre accents graves. L'en-tête du paquet est conservé tel que reçu ; le statut courant est suivi dans [AVANCEMENT.md](AVANCEMENT.md) et [CHANGELOG.md](CHANGELOG.md). Il met aussi à jour les fichiers concernés. Le paquet passe à EN ATTENTE D'INTÉGRATION et figure dans [AVANCEMENT.md](AVANCEMENT.md).
 5. Claude ouvre une PR ; Émilien la fusionne.
 6. Après fusion et relecture de `main` : statut INTÉGRÉ (section 3).
 
