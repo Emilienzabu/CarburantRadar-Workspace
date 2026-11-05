@@ -1,6 +1,6 @@
 # Avancement
 
-État au 2026-11-04. Ce fichier est mis à jour en fin de session lorsque le travail le concerne. Statuts : voir [REGLES_DE_TRAVAIL.md](REGLES_DE_TRAVAIL.md).
+État au 2026-11-05. Ce fichier est mis à jour en fin de session lorsque le travail le concerne. Statuts : voir [REGLES_DE_TRAVAIL.md](REGLES_DE_TRAVAIL.md).
 
 ## EN COURS
 
@@ -28,6 +28,8 @@
 - Portage sur `espagne/` et `italie/` : menu en 4 onglets, bouton « Installer l'application », tutoriel de démarrage, bouton Snapchat, messages de géolocalisation distincts, ville précise (géocodage inverse). Notés « en attente » dans des sessions antérieures ; peuvent avoir été faits depuis. À vérifier dans le code.
 - Option de rayon 50 km : le README de production la liste encore ; une note ancienne dit qu'elle a été abandonnée. À vérifier.
 - Alertes : demande « priorité super importante » du 2026-10-14 (nom renommé dans la notification, clic vers la station) ; une correction du service worker est rapportée, la partie Worker n'est pas confirmée.
+- Filtre géographique `geofilter.distance` du générateur vidéo : le paquet ChatGPT du 2026-11-04 le juge douteux, une note ancienne indique qu'il fonctionnait. Test réel requis (voir [journal/2026-11-05.md](journal/2026-11-05.md)).
+- Origine de l'écart 1080 × 1920 (généré, VÉRIFIÉ dans `rendu.py`) → 480 × 854 (reçu, RAPPORTÉ) : HYPOTHÈSE côté Worker `video-automation` ou récupération ; Worker non lu.
 
 ## BLOQUÉ / problèmes ouverts
 
@@ -42,6 +44,7 @@ Aucune n'est une décision. Une proposition passe en décision seulement avec l'
 
 | Proposition | Origine / date | Statut | Remarque |
 |---|---|---|---|
+| Plan de corrections et d'améliorations CarburantRadar (vidéo, Workers, alertes, comptes, stats, tests ; ordre P0 à P2) | ChatGPT, 2026-11-04 (paquet) | PROPOSITION | Détail et paquet intégral : [journal/2026-11-05.md](journal/2026-11-05.md). Plan technique par lots à préparer puis à valider lot par lot |
 | Point d'accès MCP restreint pour ChatGPT : secret distinct, Workspace seul, poussée seulement sur des branches `chatgpt/*`, sans `run_workflow` ni suppression ; Émilien fusionne toujours | Claude, 2026-11-04 | PROPOSITION | Nécessite de modifier le Worker `carburant-mcp` : **non autorisé pour le moment** (D-013). Compatibilité ChatGPT avec une URL à secret (au lieu d'OAuth) : À CONFIRMER |
 | Outils en lecture seule pour `carburant-mcp` : lister branches, PR et commits (pour connaître les dernières modifications et relever des SHA de commit) | Claude, 2026-11-04 | PROPOSITION | Même contrainte : modification du Worker non autorisée pour le moment (D-013) |
 | Tester la lecture réelle du Workspace par le connecteur GitHub de ChatGPT (32 fichiers, fraîcheur, branches non fusionnées) | Claude, 2026-11-04 | PROPOSITION | Aucune modification technique nécessaire ; résultat À CONFIRMER |
@@ -57,7 +60,7 @@ Paquets de transfert ChatGPT → Claude et travaux de ChatGPT non encore intégr
 
 | Paquet | Auteur | Reçu le | Statut | PR | Prochaine action |
 |---|---|---|---|---|---|
-| (aucun connu à ce jour) | | | | | |
+| Plan de corrections et d'améliorations CarburantRadar (paquet daté 2026-11-04) | ChatGPT | 2026-11-05 | EN ATTENTE D'INTÉGRATION | branche `integration-paquet-chatgpt-2026-11-05` | Émilien fusionne la PR ; Claude relit `main`, passe le paquet à INTÉGRÉ (CHANGELOG) et retire cette ligne |
 
 Note : un paquet EN ATTENTE DE TRANSMISSION n'existe que côté ChatGPT et Émilien ; il n'apparaît ici qu'une fois remis à Claude.
 

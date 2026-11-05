@@ -17,6 +17,7 @@ La **première ligne** est le dernier journal à lire au début d'une conversati
 
 | Date | Résumé |
 |---|---|
+| [2026-11-05](2026-11-05.md) | [ChatGPT] Paquet de transfert (plan de corrections et d'améliorations) reçu et intégré par Claude, avec vérification contre le code vidéo lu (branche `integration-paquet-chatgpt-2026-11-05`) |
 | [2026-11-04](2026-11-04.md) | [Claude] Création du workspace, connecteur multi-dépôts ; [Claude] protocole de mémoire partagée (branche `protocole-memoire`) |
 
 Après chaque session : ajouter ou compléter la ligne correspondante (en haut du tableau) et mettre à jour [../AVANCEMENT.md](../AVANCEMENT.md) si le travail le concerne.
