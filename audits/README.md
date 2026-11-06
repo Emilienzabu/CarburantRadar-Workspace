@@ -6,6 +6,8 @@ Audits techniques. Un audit distingue toujours ce qui est VÉRIFIÉ (code lu, te
 |---|---|
 | [audit_application.md](audit_application.md) | App et pages SEO |
 | [audit_videos.md](audit_videos.md) | Générateur et publication vidéo |
+| [AUDIT_E0_E1_2026-11-05.md](AUDIT_E0_E1_2026-11-05.md) | Résultats réels du diagnostic E0/E1 : filtre géographique des vidéos, exhaustivité de la référence, erreur gzip, fraîcheur des prix |
+| [AUDIT_WORKER_CARBURANT_PROXY_2026-11-04.md](AUDIT_WORKER_CARBURANT_PROXY_2026-11-04.md) | Worker `carburant-proxy` (snapshot compilé, à relire contre le code déployé) |
 | [securite_confidentialite.md](securite_confidentialite.md) | Sécurité, confidentialité, comptes |
 | [audit_international.md](audit_international.md) | Espagne et Italie, autres pays |
 
