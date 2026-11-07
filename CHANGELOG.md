@@ -19,3 +19,10 @@ Uniquement les modifications **réellement effectuées**. Format : date, [auteur
 - [Claude] Clone en lecture seule du dépôt de production dans le bac à sable de Claude (commit `c066bde`) ; exécution de tests et de rendus locaux. Aucune écriture sur `main`.
 - [Claude] Dépôt de production : branche `securite-astuce-publication` (commits `e460a2b`, `e1f7ff2`) et PR #33 « Garde temporaire : toute publication vidéo limitée au format astuce ». **PR ouverte, non fusionnée** : aucun effet en production tant qu'Émilien ne la fusionne pas. Workflow, Worker, secrets inchangés.
 - [Claude] Workspace : audit E0/E1, journal du 2026-11-06, décisions D-014 à D-016, avancement, registre des versions (branche `claude-2026-11-06-securisation-videos`, PR à fusionner par Émilien).
+
+## 2026-11-07
+
+- [Claude] Relecture de `main` du dépôt de production : la PR #33 est **fusionnée** (commit de fusion `d40c3c3`) ; le journal du 2026-11-06 est présent sur `main` du Workspace. VÉRIFIÉ. Effet réel de la garde au premier run : non vérifié.
+- [Claude] Dépôt de production : branche `claude/v100-integration-2026-11-07` (commits `6feb0b7`, `be990b3`, `bf6dd0f`, `7c65726`) et **PR #34, ouverte, non fusionnée** : encodage conforme aux Reels (AAC 48 kHz, sans edit list, BT.709), contrôle technique avant publication, envois incertains et partiels explicites, `--demo` non publiable, module géographique `video/geo.py` (non branché), schéma D1 candidat `video/ledger/0001_video_ledger.sql` (non appliqué, non validé sur D1). 85 tests OK sur un clone de la branche. Seul `video/` modifié ; workflows, Workers, secrets, bases inchangés. Aucun effet en production tant que la PR n'est pas fusionnée.
+- [Claude] Workspace : rapport [audits/AUDIT_V100_2026-11-07.md](audits/AUDIT_V100_2026-11-07.md), journal du 2026-11-07, avancement, index (branche `claude/audit-v100-2026-11-07`, PR à fusionner par Émilien).
+- Archive V100 : EN ATTENTE D'INTÉGRATION (partielle) tant que la PR #34 n'est pas fusionnée et `main` relu.

@@ -17,7 +17,8 @@ La **première ligne** est le dernier journal à lire au début d'une conversati
 
 | Date | Résumé |
 |---|---|
-| [2026-11-06](2026-11-06.md) | [Claude] Paquet ChatGPT du 2026-11-06 : audit du code réel, garde astuce (PR #33 du dépôt de production, non fusionnée), audit E0/E1 archivé, décisions D-014 à D-016 (branche `claude-2026-11-06-securisation-videos`) |
+| [2026-11-07](2026-11-07.md) | [Claude] Audit de l'archive V100 contre le code réel : tests V100 reproduits (295 + 3), encodage conforme Reels, contrôle avant publication, envois incertains/partiels, schéma D1 candidat (non validé sur D1), PR #34 du dépôt de production (non fusionnée) ; rapport [audits/AUDIT_V100_2026-11-07.md](../audits/AUDIT_V100_2026-11-07.md) (branche `claude/audit-v100-2026-11-07`) |
+| [2026-11-06](2026-11-06.md) | [Claude] Paquet ChatGPT du 2026-11-06 : audit du code réel, garde astuce (PR #33 du dépôt de production, fusionnée : commit `d40c3c3`), audit E0/E1 archivé, décisions D-014 à D-016 (branche `claude-2026-11-06-securisation-videos`) |
 | [2026-11-05](2026-11-05.md) | [ChatGPT] Paquet de transfert (plan de corrections et d'améliorations) reçu et intégré par Claude, avec vérification contre le code vidéo lu (branche `integration-paquet-chatgpt-2026-11-05`) |
 | [2026-11-04](2026-11-04.md) | [Claude] Création du workspace, connecteur multi-dépôts ; [Claude] protocole de mémoire partagée (branche `protocole-memoire`) |
 
