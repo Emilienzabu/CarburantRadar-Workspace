@@ -1,11 +1,12 @@
 # Avancement
 
-État au 2026-11-07. Ce fichier est mis à jour en fin de session lorsque le travail le concerne. Statuts : voir [REGLES_DE_TRAVAIL.md](REGLES_DE_TRAVAIL.md).
+État au 2026-11-07, complété le 2026-11-12 pour le seul chantier radar (V76) : les sessions du 2026-11-08 n'avaient pas mis ce fichier à jour (voir [journal/2026-11-08.md](journal/2026-11-08.md)). Ce fichier est mis à jour en fin de session lorsque le travail le concerne. Statuts : voir [REGLES_DE_TRAVAIL.md](REGLES_DE_TRAVAIL.md).
 
 ## EN COURS
 
 | Chantier | Détail | Statut / source |
 |---|---|---|
+| Radar CarburantRadar (prototype V76 : classement par coût total, Top 10, garage, snapshot France) | Intégration **isolée** dans `radar-v76/` du dépôt de production : copie fidèle de l'archive (75 fichiers, SHA-256), Worker candidat snapshot France V2 immuable (nouveau Worker séparé), API garage par compte, migrations D1 candidates, documentation, rollback. Session : [journal/2026-11-12.md](journal/2026-11-12.md) | EN COURS : **PR #39 ouverte, non fusionnée** (branche `claude/radar-v76-2026-11-12`, seul `radar-v76/` modifié). 541/541 + 61/61 tests sur clone propre (SQLite émule D1, Map émule R2) : VERIFIÉ. Rien déployé ; `release-gate` : dix preuves réelles absentes, **pas prêt**. Fusion déconseillée sans décision (GitHub Pages rendrait le dossier public) |
 | Sécurisation des publications vidéo | Garde temporaire : toute publication limitée au format astuce (D-016, mesure liée à l'audit E0). PR #33 du dépôt de production (3 fichiers, 18 tests, workflow inchangé). Détail : [journal/2026-11-06.md](journal/2026-11-06.md) | PR #33 **fusionnée dans `main`** (commit de fusion `d40c3c3`, VÉRIFIÉ par clone le 2026-11-07). Effet réel au premier run : voix, Worker, YouTube, Instagram **non vérifiés** |
 | Intégration de l'archive V100 (encodage Reels, contrôle avant publication, envois incertains/partiels, schéma anti-doublon candidat) | PR #34 du dépôt de production, branche `claude/v100-integration-2026-11-07` (4 commits, seul `video/` modifié, 85 tests OK sur un clone de la branche). Rapport : [audits/AUDIT_V100_2026-11-07.md](audits/AUDIT_V100_2026-11-07.md) ; session : [journal/2026-11-07.md](journal/2026-11-07.md) | EN COURS : PR #34 **ouverte, non fusionnée** (aucun effet en production). Schéma SQL **non validé sur Cloudflare D1** (testé sous SQLite seulement) |
 | Protection anti-doublon durable | Schéma candidat `video/ledger/0001_video_ledger.sql` (non appliqué) ; branchement côté Worker `video-automation` + D1 ; impossible dans le générateur seul (exécuteur sans stockage durable) | Conception et schéma candidat. **Bloqué** : code du Worker, essai sur une base D1 de test (par Émilien) |
@@ -42,6 +43,7 @@
 - Depuis quand l'API ignore `geofilter.distance`, et quelles vidéos déjà publiées sont concernées : à vérifier sur les vidéos publiées (adresses du top 3 contre la ville annoncée).
 - Pagination de `within_distance` au-delà de 100 résultats : non testée.
 - Qualité de la voix française, synchronisation des sous-titres, rythme : non évalués (service de voix inaccessible depuis le bac à sable de Claude).
+- Radar V76 : format réel de l'export `exports/json` (route, forme de `geom`, champs `*_maj`), plafond `offset+limit` de 10 000 de l'API Explore, limites Workers (CPU 10 ms, 50 sous-requêtes) sur le compte d'Émilien, politique d'usage du serveur de démonstration OSRM : HYPOTHÈSES / À CONFIRMER (détail dans [journal/2026-11-12.md](journal/2026-11-12.md)).
 
 ## BLOQUÉ / problèmes ouverts
 
@@ -50,6 +52,7 @@
 | Filtre géographique `geofilter.distance` ignoré par l'API : formats « ville » et « classement » non fiables (données nationales, même échantillon pour toutes les villes) | VÉRIFIÉ (2026-11-05) ; mitigé par la garde astuce (PR #33 fusionnée, VÉRIFIÉ) ; correction des données non faite |
 | Accès de Claude : le connecteur ne fusionne pas, ne lit ni n'écrit `.github/`, n'a pas d'outil Cloudflare ; `run_workflow` ne lance que le workflow Pages | VÉRIFIÉ par les outils disponibles (2026-11-06) ; la fusion et le déploiement passent par Émilien |
 | Code du Worker `video-automation` non disponible pour Claude : bloque l'origine du 480 × 854, l'anti-doublon durable et les statistiques | VÉRIFIÉ (aucun outil de lecture Cloudflare) ; Émilien doit fournir le code (sans secret) |
+| Code du Worker `carburant-proxy` non disponible pour Claude (ni dans le dépôt de production, ni dans le Workspace) : bloque le raccordement du garage radar à l'authentification réelle (format des sessions KV inconnu) | VÉRIFIÉ (lecture du dépôt le 2026-11-12) ; liste de ce qui manque : `radar-v76/docs/PROXY_WORKER_CHANGES.md` (PR #39) ; Émilien doit fournir le code sans secret |
 | Anti-doublon : le générateur seul ne peut pas empêcher le relancement manuel d'un créneau déjà publié (exécuteur sans stockage durable) | VÉRIFIÉ (lecture du workflow) ; solution = Worker + D1 |
 | Mesure `total_count` après curseur manquante (erreur gzip du diagnostic v3) : exhaustivité stricte de la référence C non démontrée | VÉRIFIÉ ; correction = diagnostic v4, à autoriser |
 | Google Search Console : « Impossible de lire le sitemap » (`sitemap_1.xml` et `sitemap_2.xml`, contenu identique) | RAPPORTÉ PAR L'UTILISATEUR (2026-10-08) ; état actuel À CONFIRMER |
@@ -61,6 +64,7 @@ Aucune n'est une décision. Une proposition passe en décision seulement avec l'
 
 | Proposition | Origine / date | Statut | Remarque |
 |---|---|---|---|
+| Radar V76 : retenir le contrat snapshot (curseur numérique) pour la V2 ; fournir le code de `carburant-proxy` pour raccorder le garage ; créer D1/R2 **de test** et mesurer sur Cloudflare réel ; décider du sort de `radar-v76/` avant fusion (GitHub Pages) | Claude, 2026-11-12 | PROPOSITION | Détail : [journal/2026-11-12.md](journal/2026-11-12.md) et `radar-v76/docs/` (PR #39) |
 | Brancher le schéma `video/ledger/0001_video_ledger.sql` dans `video-automation` (réservation du créneau avant publication, `needs_reconciliation` sans réessai) après lecture du Worker et essai sur une base D1 **de test** | Claude, 2026-11-07 | PROPOSITION | Détail : [audits/AUDIT_V100_2026-11-07.md](audits/AUDIT_V100_2026-11-07.md), sections 5 et 6 ; création de la base par Émilien |
 | Faire exécuter les tests `video/tests` par un workflow et empêcher le lancement manuel d'un créneau déjà publié | Claude, 2026-11-07 | PROPOSITION | Modification de `.github/workflows` : hors des droits de Claude |
 | Brancher `video/geo.py` dans `donnees.py` (même méthode géographique que la proposition E0/E1) | Claude, 2026-11-07 | PROPOSITION | Après validation de la méthode et essai sur l'API réelle |
@@ -84,6 +88,7 @@ Paquets de transfert ChatGPT → Claude et travaux de ChatGPT non encore intégr
 
 | Paquet | Auteur | Reçu le | Statut | PR | Prochaine action |
 |---|---|---|---|---|---|
+| ZIP `carburantradar_etape76.zip` (prototype Radar V51 à V76 ; notes de passation V75/V76) | ChatGPT | 2026-11-12 | EN ATTENTE D'INTÉGRATION (partielle : prototype et code candidat dans le dossier isolé `radar-v76/`, aucune intégration dans l'application ; preuves réelles du `release-gate` absentes) | PR #39 (`CarburantRadar`, non fusionnée) ; PR du Workspace `claude/radar-v76-2026-11-12` | Émilien décide du sort de `radar-v76/` (Pages) puis fusionne ; Claude relit `main` et met à jour ce statut. L'archive n'est pas conservée dans le Workspace (détenue par Émilien) |
 | ZIP `CarburantRadar_Audit_Production_V100.zip` (modules V94 à V100 : portes de livraison vidéo, protections de publication, schémas D1) | ChatGPT | 2026-11-07 | EN ATTENTE D'INTÉGRATION (partielle : portes de contrôle consolidées et branchées, schéma D1 consolidé en candidat non appliqué ; vérification distante, réconciliation et reste de l'archive non intégrés) | PR #34 (`CarburantRadar`, non fusionnée) ; PR du Workspace `claude/audit-v100-2026-11-07` | Émilien fusionne ; Claude relit `main` puis met à jour ce statut. L'archive n'est pas conservée dans le Workspace (détenue par Émilien) |
 | ZIP `carburant_handoff_20261106` : garde astuce, laboratoire de statistiques (35 tests locaux sur données simulées), plan de collecte | ChatGPT | 2026-11-06 | garde astuce INTÉGRÉE (PR #33 fusionnée, `main` relu le 2026-11-07) ; collecteurs, stockage, attribution et apprentissage EN ATTENTE D'INTÉGRATION (non intégrés) | PR #33 fusionnée | Suite après lecture du Worker `video-automation` |
 
